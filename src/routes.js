@@ -5,13 +5,13 @@ const Post = require("./models/Post");
 
 routes.post("/posts", multer(multerConfig).single("file"), async (req, res) => {
   console.log(req.file);
-  const { originalname: name, size, filename: key } = req.file;
+  const { originalname: name, size, filename: key, location: url = "" } = req.file;
 
   const post = await Post.create({
     name,
     size,
     key,
-    url: ""
+    url
   });
 
   return res.json(post);
